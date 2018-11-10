@@ -1,10 +1,10 @@
 package ru.job4j.calculate;
 
 /**
- * Class for ptinting "Hello World!!!" into console.
+ * Class for printing "Hello World!!!" into console.
  * @author Mikhail Klimentyev
- * @since 10/11/2018
- * @version 1.0
+ * @version $Id$
+ * @since 11/10/2018
  */
 public class Calculate {
 	/**
@@ -14,4 +14,13 @@ public class Calculate {
 	public static void main(String[] args) {
 		System.out.println("Hello World!!!");
 	}
+	
+	/**
+     * Method echo.
+     * @param name - Your name.
+     * @return Echo plus your name.
+     */
+    public String echo(String name) {
+        return "Echo, echo, echo : " + name;
+    }
 }
