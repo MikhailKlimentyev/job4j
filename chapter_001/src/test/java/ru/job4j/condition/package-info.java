@@ -1,5 +1,5 @@
 /**
- * Package for conditions tasks.
+ * Package for tests of conditions tasks.
  * @author Mikhail Klimentyev
  * @version $Id$
  * @since 11/24/2018
