@@ -1,8 +1,13 @@
 package ru.job4j.max;
 
+import com.tngtech.java.junit.dataprovider.DataProviderRunner;
+import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import org.junit.Test;
+import com.tngtech.java.junit.dataprovider.DataProvider;
+import org.junit.runner.RunWith;
 
 import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -12,6 +17,7 @@ import static org.junit.Assert.assertThat;
  * @version $Id$
  * @since 11/25/2018
  */
+@RunWith(DataProviderRunner.class)
 public class MaxTest {
     @Test
     public void whenFirstLessSecond() {
@@ -32,5 +38,26 @@ public class MaxTest {
         Max maxim = new Max();
         int result = maxim.max(0, 0);
         assertThat(result, is(0));
+    }
+
+    @DataProvider
+    public static Object[][] dataProviderForMaxFromThree() {
+        return new Object[][]{
+                {3, 1, 2, 3},
+                {1, 1, 4, 4},
+                {0, 0, 0, 0},
+                {0, 1, 0, 1},
+                {0, 1, 5, 5},
+                {-1, 0, -5, 0}
+        };
+    }
+
+    @Test
+    @UseDataProvider("dataProviderForMaxFromThree")
+    public void whenThreeNumbersMaxOfThemReturned(int a, int b, int c, int expected) {
+        Max maxim = new Max();
+
+        int result = maxim.max(a, b, c);
+        assertThat(result, is(expected));
     }
 }
