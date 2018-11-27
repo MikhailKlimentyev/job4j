@@ -80,9 +80,10 @@ public class Triangle {
      * @return
      */
     private boolean exist(double ab, double ac, double bc) {
+        Boolean triangleExistence = false;
         if (ab + ac > bc && ab + bc > ac && ac + bc > ab) {
-            return true;
+            triangleExistence = true;
         }
-        return false;
+        return triangleExistence;
     }
 }
