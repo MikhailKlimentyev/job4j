@@ -7,7 +7,6 @@ import com.tngtech.java.junit.dataprovider.DataProvider;
 import org.junit.runner.RunWith;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -40,6 +39,15 @@ public class MaxTest {
         assertThat(result, is(0));
     }
 
+    @Test
+    @UseDataProvider("dataProviderForMaxFromThree")
+    public void whenThreeNumbersThenMaxOfThemReturned(int a, int b, int c, int expected) {
+        Max maxim = new Max();
+
+        int result = maxim.max(a, b, c);
+        assertThat(result, is(expected));
+    }
+
     @DataProvider
     public static Object[][] dataProviderForMaxFromThree() {
         return new Object[][]{
@@ -50,14 +58,5 @@ public class MaxTest {
                 {0, 1, 5, 5},
                 {-1, 0, -5, 0}
         };
-    }
-
-    @Test
-    @UseDataProvider("dataProviderForMaxFromThree")
-    public void whenThreeNumbersMaxOfThemReturned(int a, int b, int c, int expected) {
-        Max maxim = new Max();
-
-        int result = maxim.max(a, b, c);
-        assertThat(result, is(expected));
     }
 }
