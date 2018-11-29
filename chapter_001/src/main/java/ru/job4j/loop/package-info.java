@@ -1,5 +1,5 @@
 /**
- * Package for Counter task.
+ * Package for loops tasks.
  *
  * @author Mikhail Klimentyev
  * @version $Id$
