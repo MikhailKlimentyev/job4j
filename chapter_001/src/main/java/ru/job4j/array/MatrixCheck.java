@@ -20,13 +20,19 @@ public class MatrixCheck {
      */
     public boolean mono(boolean[][] data) {
         boolean result = true;
-        boolean temp;
+        // first diagonal
         for (int i = 1; i < data.length - 1; i++) {
-            for (int j = 1; j < data[i].length - 1; j++) {
-                if (data[i][i] != data[i - 1][i - 1]) {
-                    result = false;
-                    break;
-                }
+            if (data[i][i] != data[i - 1][i - 1]) {
+                result = false;
+                break;
+            }
+        }
+
+        // second diagonal
+        for (int i = 1; i < data.length - 1; i++) {
+            if (data[data.length - i - 1][i] != data[data.length - i][i - 1]) {
+                result = false;
+                break;
             }
         }
         return result;
