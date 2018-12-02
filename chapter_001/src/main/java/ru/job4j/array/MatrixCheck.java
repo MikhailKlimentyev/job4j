@@ -20,16 +20,14 @@ public class MatrixCheck {
      */
     public boolean mono(boolean[][] data) {
         boolean result = true;
-        // first diagonal
+
         for (int i = 1; i < data.length - 1; i++) {
+            // first diagonal
             if (data[i][i] != data[i - 1][i - 1]) {
                 result = false;
                 break;
             }
-        }
-
-        // second diagonal
-        for (int i = 1; i < data.length - 1; i++) {
+            // second diagonal
             if (data[data.length - i - 1][i] != data[data.length - i][i - 1]) {
                 result = false;
                 break;
