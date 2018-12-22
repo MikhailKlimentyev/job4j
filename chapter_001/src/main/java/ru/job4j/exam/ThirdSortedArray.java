@@ -45,7 +45,6 @@ public class ThirdSortedArray {
             secondIndex++;
             thirdIndex++;
         }
-
         return third;
     }
 }
