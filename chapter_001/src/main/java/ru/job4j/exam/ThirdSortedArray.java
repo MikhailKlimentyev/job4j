@@ -18,11 +18,9 @@ public class ThirdSortedArray {
      */
     public int[] getArray(int[] first, int[] second) {
         int[] third = new int[first.length + second.length];
-
         int firstIndex = 0;
         int secondIndex = 0;
         int thirdIndex = 0;
-
         while (firstIndex < first.length && secondIndex < second.length) {
             if (first[firstIndex] < second[secondIndex]) {
                 third[thirdIndex] = first[firstIndex];
@@ -33,13 +31,11 @@ public class ThirdSortedArray {
             }
             thirdIndex++;
         }
-
         while (firstIndex < first.length) {
             third[thirdIndex] = first[firstIndex];
             firstIndex++;
             thirdIndex++;
         }
-
         while (secondIndex < second.length) {
             third[thirdIndex] = second[secondIndex];
             secondIndex++;

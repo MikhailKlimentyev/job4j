@@ -20,17 +20,17 @@ public class ArrayDuplicate {
      * @return array without duplicates.
      */
     public String[] remove(String[] array) {
-        int uniqueElements = array.length;
-        for (int outer = 0; outer < uniqueElements; outer++) {
-            for (int inner = outer + 1; inner < uniqueElements; inner++) {
+        int unique = array.length;
+        for (int outer = 0; outer < unique; outer++) {
+            for (int inner = outer + 1; inner < unique; inner++) {
                 if (array[outer].equals(array[inner])) {
-                    array[inner] = array[uniqueElements - 1];
-                    uniqueElements--;
+                    array[inner] = array[unique - 1];
+                    unique--;
                     inner--;
                 }
             }
         }
-        return Arrays.copyOf(array, uniqueElements);
+        return Arrays.copyOf(array, unique);
     }
 
 }
