@@ -50,16 +50,21 @@ public class Tracker {
      * replace.
      * Метод проходит по всем элементам массива и если уникальный ключ переданной заявки
      * совпадает с уникальным ключом заявки из массива, то заменяет заявку в массиве.
+     * Возращает результат удаления (true -- если удалось удалить, false -- если не удалось удалить).
      *
      * @param id   уникальный ключ для заявки.
      * @param item заявка.
+     * @return результат удаления.
      */
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean result = false;
         for (int index = 0; index != this.position; index++) {
             if (this.items[index].getId().equals(id)) {
                 this.items[index] = item;
+                result = true;
             }
         }
+        return result;
     }
 
     /**
@@ -67,18 +72,26 @@ public class Tracker {
      * Метод проходит по всем элементам массива и если уникальный ключ переданной заявки
      * совпадает с уникальным ключом заявки из массива,
      * то удаляет такую заявку из массива смещением всех элементов справа от такой заявки на одну ячейку влево.
+     * Если уникальный ключ переданной заявки совпадает с уникальным ключом последней заявки в массиве,
+     * то последняя заявка в массиве заменяется первой заявкой в массиве.
+     * Возращает результат удаления (true -- если удалось удалить, false -- если не удалось удалить).
      *
      * @param id уникальный ключ для заявки.
+     * @return результат удаления.
      */
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean result = false;
         for (int index = 0; index != this.position; index++) {
             if (this.items[index].getId().equals(id)) {
                 System.arraycopy(this.items, index + 1, this.items, index, position - index - 1);
+                result = true;
             }
             if (this.items[index].getId().equals(id) && index == position - 1) {
                 System.arraycopy(this.items, 0, this.items, index, 1);
+                result = true;
             }
         }
+        return result;
     }
 
     /**

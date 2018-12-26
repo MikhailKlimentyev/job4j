@@ -33,11 +33,17 @@ public class Item {
      */
     private String[] comments;
 
-    public Item(String name, String desc, long created) {
-        this.id = id;
+    /**
+     * Item.
+     * Конструктор.
+     *
+     * @param name уникальный идентификатор заявки.
+     * @param desc описание заявки.
+     */
+    public Item(String name, String desc) {
         this.name = name;
         this.desc = desc;
-        this.created = created;
+        this.created = System.currentTimeMillis();
     }
 
     public String getId() {
