@@ -6,7 +6,11 @@ package ru.job4j.tracker;
  * @author Mikhail Klimentyev
  * @version $Id$
  * @since 12/29/2018
- */
+ */ test
+test
+test
+
+test
 public class StartUI {
 
     /**
