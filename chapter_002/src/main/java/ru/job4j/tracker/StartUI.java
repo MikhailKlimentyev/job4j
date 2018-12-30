@@ -74,9 +74,9 @@ public class StartUI {
         Item[] items = this.tracker.findByName(name);
         for (int i = 0; i != items.length; i++) {
             if (items[i] != null) {
-                System.out.println("Id: " + items[i].getId() + "; " +
-                        " Name: " + items[i].getName() + "; " +
-                        " Description: " + items[i].getDesc() + "; ");
+                System.out.println("Id: " + items[i].getId() + "; "
+                        + " Name: " + items[i].getName() + "; "
+                        + " Description: " + items[i].getDesc() + "; ");
             }
         }
         System.out.println("---------------------------------------");
@@ -88,9 +88,9 @@ public class StartUI {
     private void findItemById() {
         String id = this.input.ask("Please, type id of item to be printed: ");
         Item item = this.tracker.findById(id);
-        System.out.println("Id: " + item.getId() + "; " +
-                " Name: " + item.getName() + "; " +
-                " Description: " + item.getDesc() + "; ");
+        System.out.println("Id: " + item.getId() + "; "
+                + " Name: " + item.getName() + "; "
+                + " Description: " + item.getDesc() + "; ");
         System.out.println("---------------------------------------");
     }
 
@@ -129,9 +129,9 @@ public class StartUI {
         Item[] items = this.tracker.findAll();
         for (int i = 0; i < items.length; i++) {
             System.out.println(i + ". "
-                    + "Id: " + items[i].getId() + "; " +
-                    " Name: " + items[i].getName() + "; " +
-                    " Description: " + items[i].getDesc() + "; ");
+                    + "Id: " + items[i].getId() + "; "
+                    + " Name: " + items[i].getName() + "; "
+                    + " Description: " + items[i].getDesc() + "; ");
         }
         System.out.println("---------------------------------------");
     }
@@ -152,14 +152,14 @@ public class StartUI {
      * Метод выводит меню консоль.
      */
     private void showMenu() {
-        System.out.println("\nMenu:\n" +
-                "0. Add new item\n" +
-                "1. Show all items\n" +
-                "2. Edit item\n" +
-                "3. Delete item\n" +
-                "4. Find item by Id\n" +
-                "5. Find items by name\n" +
-                "6. Exit Program");
+        System.out.println("\nMenu:\n"
+                + "0. Add new item\n"
+                + "1. Show all items\n"
+                + "2. Edit item\n"
+                + "3. Delete item\n"
+                + "4. Find item by Id\n"
+                + "5. Find items by name\n"
+                + "6. Exit Program");
     }
 
     /**
