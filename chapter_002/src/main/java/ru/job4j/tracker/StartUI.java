@@ -99,7 +99,7 @@ public class StartUI {
      */
     private void deleteItem() {
         String id = this.input.ask("Please, type id of item to be deleted: ");
-        if (this.tracker.delete(id) == true) {
+        if (this.tracker.delete(id)) {
             System.out.println("------------ Item with Id: " + id + " was successfully deleted -----------");
         } else {
             System.out.println("------------ There is no item with id: " + id + " -----------");
@@ -114,7 +114,7 @@ public class StartUI {
         String desc = this.input.ask("Please, type item description: ");
         Item item = new Item(name, desc);
         String id = this.input.ask("Please, type id of item to be replaced: ");
-        if (this.tracker.replace(id, item) == true) {
+        if (this.tracker.replace(id, item)) {
             System.out.println("------------ Item with Id: " + id + " was successfully replaced -----------");
         } else {
             System.out.println("------------ There is no item with id: " + id + " -----------");
