@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
+
 /**
  * Item.
  *
@@ -44,6 +46,17 @@ public class Item {
         this.name = name;
         this.desc = desc;
         this.created = System.currentTimeMillis();
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", created=" + created +
+                ", comments=" + Arrays.toString(comments) +
+                '}';
     }
 
     public String getId() {

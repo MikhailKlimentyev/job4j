@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
  * @since 12/25/2018
  */
 public class TrackerTest {
+
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();

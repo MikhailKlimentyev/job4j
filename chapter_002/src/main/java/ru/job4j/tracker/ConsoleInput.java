@@ -9,7 +9,7 @@ import java.util.Scanner;
  * @version $Id$
  * @since 12/29/2018
  */
-public class ConsoleInput {
+public class ConsoleInput implements Input {
 
     /**
      * ask.
@@ -18,6 +18,7 @@ public class ConsoleInput {
      * @param question вопрос для пользователя.
      * @return ответ пользователя.
      */
+    @Override
     public String ask(String question) {
         Scanner scanner = new Scanner(System.in);
         System.out.print(question);

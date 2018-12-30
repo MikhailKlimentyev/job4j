@@ -22,7 +22,7 @@ public class StartUI {
     /**
      * Получение данных от пользователя.
      */
-    private final ConsoleInput input;
+    private final Input input;
 
     /**
      * Хранилище заявок.
@@ -35,7 +35,7 @@ public class StartUI {
      * @param input   ввод данных.
      * @param tracker хранилище заявок.
      */
-    public StartUI(ConsoleInput input, Tracker tracker) {
+    public StartUI(Input input, Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -74,9 +74,7 @@ public class StartUI {
         Item[] items = this.tracker.findByName(name);
         for (int i = 0; i != items.length; i++) {
             if (items[i] != null) {
-                System.out.println("Id: " + items[i].getId() + "; "
-                        + " Name: " + items[i].getName() + "; "
-                        + " Description: " + items[i].getDesc() + "; ");
+                System.out.println(items[i].toString());
             }
         }
         System.out.println("---------------------------------------");
@@ -88,9 +86,11 @@ public class StartUI {
     private void findItemById() {
         String id = this.input.ask("Please, type id of item to be printed: ");
         Item item = this.tracker.findById(id);
-        System.out.println("Id: " + item.getId() + "; "
-                + " Name: " + item.getName() + "; "
-                + " Description: " + item.getDesc() + "; ");
+        if (item != null) {
+            System.out.println(item.toString());
+        } else {
+            System.out.println("------------ There is no item with id: " + id + " -----------");
+        }
         System.out.println("---------------------------------------");
     }
 
@@ -128,10 +128,7 @@ public class StartUI {
         System.out.println("------------ All items: --------------");
         Item[] items = this.tracker.findAll();
         for (int i = 0; i < items.length; i++) {
-            System.out.println(i + ". "
-                    + "Id: " + items[i].getId() + "; "
-                    + " Name: " + items[i].getName() + "; "
-                    + " Description: " + items[i].getDesc() + "; ");
+            System.out.println(i + ". " + items[i].toString());
         }
         System.out.println("---------------------------------------");
     }
@@ -152,13 +149,13 @@ public class StartUI {
      * Метод выводит меню консоль.
      */
     private void showMenu() {
-        System.out.println("\nMenu:\n"
-                + "0. Add new item\n"
-                + "1. Show all items\n"
-                + "2. Edit item\n"
-                + "3. Delete item\n"
-                + "4. Find item by Id\n"
-                + "5. Find items by name\n"
+        System.out.println(System.lineSeparator() + "Menu:" + System.lineSeparator()
+                + "0. Add new item" + System.lineSeparator()
+                + "1. Show all items" + System.lineSeparator()
+                + "2. Edit item" + System.lineSeparator()
+                + "3. Delete item" + System.lineSeparator()
+                + "4. Find item by Id" + System.lineSeparator()
+                + "5. Find items by name" + System.lineSeparator()
                 + "6. Exit Program");
     }
 
