@@ -7,13 +7,13 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 /**
- * StartUITest.
+ * StartUILogicTest.
  *
  * @author Mikhail Klimentyev
  * @version $Id$
  * @since 12/30/2018
  */
-public class StartUITest {
+public class StartUILogicTest {
     //createItem() test
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
