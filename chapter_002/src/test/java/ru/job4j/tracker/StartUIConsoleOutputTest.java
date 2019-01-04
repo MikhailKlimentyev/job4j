@@ -32,7 +32,7 @@ public class StartUIConsoleOutputTest {
     /**
      * Текст меню, которое выводится на консоль.
      */
-    private final String MENU = System.lineSeparator()
+    private final String menu = System.lineSeparator()
             + "Menu:"
             + System.lineSeparator()
             + "0. Add new item"
@@ -70,13 +70,13 @@ public class StartUIConsoleOutputTest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .append("------------ Adding of a new item --------------")
                                 .append(System.lineSeparator())
                                 .append("------------ New item with Id: " + tracker.findAll()[0].getId() + " is created -----------")
                                 .append(System.lineSeparator())
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .toString()
                 )
@@ -95,7 +95,7 @@ public class StartUIConsoleOutputTest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .append("------------ All items: --------------")
                                 .append(System.lineSeparator())
@@ -107,7 +107,7 @@ public class StartUIConsoleOutputTest {
                                 .append(System.lineSeparator())
                                 .append("---------------------------------------")
                                 .append(System.lineSeparator())
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .toString()
                 )
@@ -125,11 +125,11 @@ public class StartUIConsoleOutputTest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .append("------------ Item with Id: " + initialId + " was successfully replaced -----------")
                                 .append(System.lineSeparator())
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .toString()
                 )
@@ -146,11 +146,11 @@ public class StartUIConsoleOutputTest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .append("------------ Item with Id: " + item.getId() + " was successfully deleted -----------")
                                 .append(System.lineSeparator())
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .toString()
                 )
@@ -167,13 +167,13 @@ public class StartUIConsoleOutputTest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .append(tracker.findById(item.getId()).toString())
                                 .append(System.lineSeparator())
                                 .append("---------------------------------------")
                                 .append(System.lineSeparator())
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .toString()
                 )
@@ -190,13 +190,13 @@ public class StartUIConsoleOutputTest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .append(tracker.findById(item.getId()).toString())
                                 .append(System.lineSeparator())
                                 .append("---------------------------------------")
                                 .append(System.lineSeparator())
-                                .append(MENU)
+                                .append(menu)
                                 .append(System.lineSeparator())
                                 .toString()
                 )
