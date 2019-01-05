@@ -22,6 +22,11 @@ public class StartUI {
     private final Tracker tracker;
 
     /**
+     * Флаг для выхода из цикла программы.
+     */
+    private boolean working = true;
+
+    /**
      * Конструтор инициализирующий поля.
      *
      * @param input   ввод данных.
@@ -38,18 +43,24 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> range = new ArrayList<>();
-        menu.fillActions();
+        menu.fillActions(this);
         for (int i = 0; i < menu.getActionsLength(); i++) {
             range.add(i);
         }
         do {
+            System.out.println("Menu:");
             menu.show();
             int key = Integer.valueOf(this.input.ask("Please, select: "));
             menu.select(range.get(key));
-            if (key == 6) {
-                break;
-            }
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+        } while (this.working);
+    }
+
+    /**
+     * stop.
+     * Метод меняет состояние переменной, которая управляет основным циклом программы, на false.
+     */
+    public void stop() {
+        this.working = false;
     }
 
     /**

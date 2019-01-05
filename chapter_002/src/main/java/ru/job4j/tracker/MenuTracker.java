@@ -48,16 +48,19 @@ public class MenuTracker {
     }
 
     /**
+     * fillActions.
      * Метод заполняет хранилище пунктов меню.
+     *
+     * @param ui ссылка на объект класса StartUI.
      */
-    public void fillActions() {
+    public void fillActions(StartUI ui) {
         this.actions.add(new AddItem(0, "Add new item"));
         this.actions.add(new ShowItems(1, "Show all items"));
         this.actions.add(new UpdateItem(2, "Edit item"));
         this.actions.add(new DeleteItem(3, "Delete item"));
         this.actions.add(new FindItemById(4, "Find item by Id"));
         this.actions.add(new FindItemsByname(5, "Find items by name"));
-        this.actions.add(new ExitProgram(6, "Exit Program"));
+        this.actions.add(new ExitProgram(6, "Exit Program", ui));
     }
 
     /**
@@ -476,12 +479,11 @@ public class MenuTracker {
         public String info() {
             return String.format("%s. %s", this.key(), this.name);
         }
-
-        /**
-         * ExitProgram.
-         */
     }
 
+    /**
+     * ExitProgram.
+     */
     private class ExitProgram implements UserAction {
         /**
          * Номер пункта Exit Program в меню.
@@ -494,14 +496,21 @@ public class MenuTracker {
         private final String name;
 
         /**
+         * Ссылка на объект класса StartUI.
+         */
+        private final StartUI ui;
+
+        /**
          * Конструктор.
          *
          * @param number Номер пункта в меню.
          * @param name   Название пункта в меню.
+         * @param ui     ссылка на объект класса StartUI.
          */
-        public ExitProgram(int number, String name) {
+        public ExitProgram(int number, String name, StartUI ui) {
             this.number = number;
             this.name = name;
+            this.ui = ui;
         }
 
         /**
@@ -517,12 +526,15 @@ public class MenuTracker {
 
         /**
          * execute.
+         * Метод останавливает выполнение основного цикла программы.
          *
          * @param input   объект типа Input.
          * @param tracker объект типа Tracker
          */
         @Override
         public void execute(Input input, Tracker tracker) {
+            System.out.println("------------ Program has been stopped ------------------");
+            this.ui.stop();
         }
 
         /**

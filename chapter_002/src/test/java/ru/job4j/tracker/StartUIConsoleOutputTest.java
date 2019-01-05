@@ -32,8 +32,7 @@ public class StartUIConsoleOutputTest {
     /**
      * Текст меню, которое выводится на консоль.
      */
-    private final String menu = System.lineSeparator()
-            + "Menu:"
+    private final String menu = "Menu:"
             + System.lineSeparator()
             + "0. Add new item"
             + System.lineSeparator()
@@ -48,6 +47,10 @@ public class StartUIConsoleOutputTest {
             + "5. Find items by name"
             + System.lineSeparator()
             + "6. Exit Program";
+
+    private final String stop =
+            "------------ Program has been stopped ------------------"
+                    + System.lineSeparator();
 
     @Before
     public void loadOutput() {
@@ -78,6 +81,7 @@ public class StartUIConsoleOutputTest {
                                 .append(System.lineSeparator())
                                 .append(menu)
                                 .append(System.lineSeparator())
+                                .append(stop)
                                 .toString()
                 )
         );
@@ -109,6 +113,7 @@ public class StartUIConsoleOutputTest {
                                 .append(System.lineSeparator())
                                 .append(menu)
                                 .append(System.lineSeparator())
+                                .append(stop)
                                 .toString()
                 )
         );
@@ -131,6 +136,7 @@ public class StartUIConsoleOutputTest {
                                 .append(System.lineSeparator())
                                 .append(menu)
                                 .append(System.lineSeparator())
+                                .append(stop)
                                 .toString()
                 )
         );
@@ -152,6 +158,7 @@ public class StartUIConsoleOutputTest {
                                 .append(System.lineSeparator())
                                 .append(menu)
                                 .append(System.lineSeparator())
+                                .append(stop)
                                 .toString()
                 )
         );
@@ -175,6 +182,7 @@ public class StartUIConsoleOutputTest {
                                 .append(System.lineSeparator())
                                 .append(menu)
                                 .append(System.lineSeparator())
+                                .append(stop)
                                 .toString()
                 )
         );
@@ -198,6 +206,7 @@ public class StartUIConsoleOutputTest {
                                 .append(System.lineSeparator())
                                 .append(menu)
                                 .append(System.lineSeparator())
+                                .append(stop)
                                 .toString()
                 )
         );
