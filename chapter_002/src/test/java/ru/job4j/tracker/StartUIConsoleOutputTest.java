@@ -52,12 +52,18 @@ public class StartUIConsoleOutputTest {
             "------------ Program has been stopped ------------------"
                     + System.lineSeparator();
 
+    /**
+     * Метод устанавливает вывод в память.
+     */
     @Before
     public void loadOutput() {
         System.out.println("Execute before method.");
         System.setOut(new PrintStream(this.mem));
     }
 
+    /**
+     * Метод устанавливает вывод в консоль.
+     */
     @After
     public void backOutput() {
         System.setOut(this.out);

@@ -30,12 +30,18 @@ public class ValidateInputTest {
      */
     private final ByteArrayOutputStream mem = new ByteArrayOutputStream();
 
+    /**
+     * Метод устанавливает вывод в память.
+     */
     @Before
     public void loadMem() {
         System.out.println("Execute before method.");
         System.setOut(new PrintStream(this.mem));
     }
 
+    /**
+     * Метод устанавливает вывод в консоль.
+     */
     @After
     public void loadSys() {
         System.setOut(this.out);
@@ -43,9 +49,25 @@ public class ValidateInputTest {
     }
 
     @Test
+    public void whenValidInputThenThereIsNoMessage() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[]{"0"})
+        );
+        List<Integer> range = new ArrayList<>();
+        range.add(0);
+        input.ask("Please, select menu number: ", range);
+        assertThat(
+                this.mem.toString(),
+                is(
+                        String.format("")
+                )
+        );
+    }
+
+    @Test
     public void whenInvalidInputThenAppropriateMessage() {
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[]{"invalid", "6"})
+                new StubInput(new String[]{"Invalid", "0"})
         );
         List<Integer> range = new ArrayList<>();
         range.add(0);
@@ -54,6 +76,22 @@ public class ValidateInputTest {
                 this.mem.toString(),
                 is(
                         String.format("Please, enter number.%n")
+                )
+        );
+    }
+
+    @Test
+    public void whenOutOfMenuRangeInputThenAppropriateMessage() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[]{"1", "0"})
+        );
+        List<Integer> range = new ArrayList<>();
+        range.add(0);
+        input.ask("Please, select menu number: ", range);
+        assertThat(
+                this.mem.toString(),
+                is(
+                        String.format("Please, enter number from menu.%n")
                 )
         );
     }
