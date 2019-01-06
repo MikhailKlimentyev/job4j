@@ -9,7 +9,32 @@ import java.util.List;
  * @version $Id$
  * @since 01/06/2019
  */
-public class ValidateInput extends ConsoleInput {
+public class ValidateInput implements Input {
+
+    /**
+     * Ввод данных из консоли.
+     */
+    private final Input input;
+
+    /**
+     * Конструктор.
+     *
+     * @param input объект класса Input.
+     */
+    public ValidateInput(Input input) {
+        this.input = input;
+    }
+
+    /**
+     * ask.
+     *
+     * @param question вопрос пользователю, который выведется в консоль.
+     * @return ответ пользователя, полученный через консоль.
+     */
+    @Override
+    public String ask(String question) {
+        return this.input.ask(question);
+    }
 
     /**
      * ask.
@@ -28,7 +53,7 @@ public class ValidateInput extends ConsoleInput {
         boolean invalid = true;
         do {
             try {
-                value = super.ask(question, range);
+                value = this.input.ask(question, range);
                 invalid = false;
             } catch (NumberFormatException nfe) {
                 System.out.println("Please, enter number.");

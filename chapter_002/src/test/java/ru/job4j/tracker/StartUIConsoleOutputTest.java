@@ -22,12 +22,12 @@ public class StartUIConsoleOutputTest {
     /**
      * Поле содержит дефолтный вывод в консоль.
      */
-    private final PrintStream stdOut = System.out;
+    private final PrintStream out = System.out;
 
     /**
      * Буфер для результата.
      */
-    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream mem = new ByteArrayOutputStream();
 
     /**
      * Текст меню, которое выводится на консоль.
@@ -55,12 +55,12 @@ public class StartUIConsoleOutputTest {
     @Before
     public void loadOutput() {
         System.out.println("Execute before method.");
-        System.setOut(new PrintStream(this.out));
+        System.setOut(new PrintStream(this.mem));
     }
 
     @After
     public void backOutput() {
-        System.setOut(this.stdOut);
+        System.setOut(this.out);
         System.out.println("Execute after method.");
     }
 
@@ -70,7 +70,7 @@ public class StartUIConsoleOutputTest {
         Tracker tracker = new Tracker();
         new StartUI(new StubInput(new String[]{"0", "test name", "desc", "6"}), tracker).init();
         assertThat(
-                new String(out.toByteArray()),
+                new String(mem.toByteArray()),
                 is(
                         new StringBuilder()
                                 .append(menu)
@@ -96,7 +96,7 @@ public class StartUIConsoleOutputTest {
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         new StartUI(new StubInput(new String[]{"1", "6"}), tracker).init();
         assertThat(
-                new String(out.toByteArray()),
+                new String(mem.toByteArray()),
                 is(
                         new StringBuilder()
                                 .append(menu)
@@ -127,7 +127,7 @@ public class StartUIConsoleOutputTest {
         String initialId = tracker.findAll()[0].getId();
         new StartUI(new StubInput(new String[]{"2", "replaced name", "replaced desc", item.getId(), "6"}), tracker).init();
         assertThat(
-                new String(out.toByteArray()),
+                new String(mem.toByteArray()),
                 is(
                         new StringBuilder()
                                 .append(menu)
@@ -149,7 +149,7 @@ public class StartUIConsoleOutputTest {
         Item item = tracker.add(new Item("name", "desc"));
         new StartUI(new StubInput(new String[]{"3", item.getId(), "6"}), tracker).init();
         assertThat(
-                new String(out.toByteArray()),
+                new String(mem.toByteArray()),
                 is(
                         new StringBuilder()
                                 .append(menu)
@@ -171,7 +171,7 @@ public class StartUIConsoleOutputTest {
         Item item = tracker.add(new Item("name", "desc"));
         new StartUI(new StubInput(new String[]{"4", item.getId(), "6"}), tracker).init();
         assertThat(
-                new String(out.toByteArray()),
+                new String(mem.toByteArray()),
                 is(
                         new StringBuilder()
                                 .append(menu)
@@ -195,7 +195,7 @@ public class StartUIConsoleOutputTest {
         Item item = tracker.add(new Item("name", "desc"));
         new StartUI(new StubInput(new String[]{"5", item.getName(), "6"}), tracker).init();
         assertThat(
-                new String(out.toByteArray()),
+                new String(mem.toByteArray()),
                 is(
                         new StringBuilder()
                                 .append(menu)
