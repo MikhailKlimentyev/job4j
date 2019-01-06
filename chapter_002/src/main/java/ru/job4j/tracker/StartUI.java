@@ -50,7 +50,7 @@ public class StartUI {
         do {
             System.out.println("Menu:");
             menu.show();
-            int key = Integer.valueOf(this.input.ask("Please, select: "));
+            int key = this.input.ask("Please, select menu number: ", range);
             menu.select(range.get(key));
         } while (this.working);
     }
@@ -69,6 +69,6 @@ public class StartUI {
      * @param args
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }
