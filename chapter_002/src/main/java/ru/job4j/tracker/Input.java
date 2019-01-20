@@ -13,5 +13,5 @@ public interface Input {
 
     public abstract String ask(String question);
 
-    public abstract int ask(String question, List<Integer> range);
+    public abstract int ask(String question, int[] range);
 }

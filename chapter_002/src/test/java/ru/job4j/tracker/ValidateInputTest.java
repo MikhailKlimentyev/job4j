@@ -53,8 +53,8 @@ public class ValidateInputTest {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[]{"0"})
         );
-        List<Integer> range = new ArrayList<>();
-        range.add(0);
+        int[] range = new int[7];
+        range[0] = 0;
         input.ask("Please, select menu number: ", range);
         assertThat(
                 this.mem.toString(),
@@ -69,8 +69,8 @@ public class ValidateInputTest {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[]{"Invalid", "0"})
         );
-        List<Integer> range = new ArrayList<>();
-        range.add(0);
+        int[] range = new int[7];
+        range[0] = 0;
         input.ask("Please, select menu number: ", range);
         assertThat(
                 this.mem.toString(),
@@ -85,8 +85,8 @@ public class ValidateInputTest {
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[]{"1", "0"})
         );
-        List<Integer> range = new ArrayList<>();
-        range.add(0);
+        int[] range = new int[7];
+        range[0] = 0;
         input.ask("Please, select menu number: ", range);
         assertThat(
                 this.mem.toString(),

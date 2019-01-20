@@ -42,16 +42,16 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        List<Integer> range = new ArrayList<>();
+        int[] range = new int[7];
         menu.fillActions(this);
         for (int i = 0; i < menu.getActionsLength(); i++) {
-            range.add(i);
+            range[i] = i;
         }
         do {
             System.out.println("Menu:");
             menu.show();
             int key = this.input.ask("Please, select menu number: ", range);
-            menu.select(range.get(key));
+            menu.select(range[key]);
         } while (this.working);
     }
 
