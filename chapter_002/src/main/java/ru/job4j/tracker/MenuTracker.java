@@ -87,17 +87,7 @@ public class MenuTracker {
     /**
      * AddItem.
      */
-    private class AddItem implements UserAction {
-        /**
-         * Номер пункта Add Item в меню.
-         */
-        private final int number;
-
-        /**
-         * Название пункта Add Item в меню.
-         */
-        private final String name;
-
+    private class AddItem extends BaseAction {
         /**
          * Конструктор.
          *
@@ -105,19 +95,7 @@ public class MenuTracker {
          * @param name   Название пункта в меню.
          */
         public AddItem(int number, String name) {
-            this.number = number;
-            this.name = name;
-        }
-
-        /**
-         * key.
-         * Метод возвращает номер пункта меню Add Item.
-         *
-         * @return номер пункта меню.
-         */
-        @Override
-        public int key() {
-            return number;
+            super(number, name);
         }
 
         /**
@@ -136,33 +114,12 @@ public class MenuTracker {
             tracker.add(item);
             System.out.println("------------ New item with Id: " + item.getId() + " is created -----------");
         }
-
-        /**
-         * info.
-         * Метод возвращает информацию(ключ и описание) о пункте меню Add Item.
-         *
-         * @return информацию(ключ и описание) о пункте меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), this.name);
-        }
     }
 
     /**
      * ShowItems.
      */
-    private class ShowItems implements UserAction {
-        /**
-         * Номер пункта Show Items в меню.
-         */
-        private final int number;
-
-        /**
-         * Название пункта Show Items в меню.
-         */
-        private final String name;
-
+    private class ShowItems extends BaseAction {
         /**
          * Конструктор.
          *
@@ -170,19 +127,7 @@ public class MenuTracker {
          * @param name   Название пункта в меню.
          */
         public ShowItems(int number, String name) {
-            this.number = number;
-            this.name = name;
-        }
-
-        /**
-         * key.
-         * Метод возвращает номер пункта меню Show Items.
-         *
-         * @return номер пункта меню.
-         */
-        @Override
-        public int key() {
-            return number;
+            super(number, name);
         }
 
         /**
@@ -201,33 +146,12 @@ public class MenuTracker {
             }
             System.out.println("---------------------------------------");
         }
-
-        /**
-         * info.
-         * Метод возвращает информацию(ключ и описание) о пункте меню Show Items.
-         *
-         * @return информацию(ключ и описание) о пункте меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), this.name);
-        }
     }
 
     /**
      * UpdateItem.
      */
-    private class UpdateItem implements UserAction {
-        /**
-         * Номер пункта Update Item в меню.
-         */
-        private final int number;
-
-        /**
-         * Название пункта Update Item в меню.
-         */
-        private final String name;
-
+    private class UpdateItem extends BaseAction {
         /**
          * Конструктор.
          *
@@ -235,19 +159,7 @@ public class MenuTracker {
          * @param name   Название пункта в меню.
          */
         public UpdateItem(int number, String name) {
-            this.number = number;
-            this.name = name;
-        }
-
-        /**
-         * key.
-         * Метод возвращает номер пункта меню Update Item.
-         *
-         * @return номер пункта меню.
-         */
-        @Override
-        public int key() {
-            return number;
+            super(number, name);
         }
 
         /**
@@ -269,33 +181,12 @@ public class MenuTracker {
                 System.out.println("------------ There is no item with id: " + id + " -----------");
             }
         }
-
-        /**
-         * info.
-         * Метод возвращает информацию(ключ и описание) о пункте меню Update Item.
-         *
-         * @return информацию(ключ и описание) о пункте меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), this.name);
-        }
     }
 
     /**
      * DeleteItem.
      */
-    private class DeleteItem implements UserAction {
-        /**
-         * Номер пункта Delete Item в меню.
-         */
-        private final int number;
-
-        /**
-         * Название пункта Delete Item в меню.
-         */
-        private final String name;
-
+    private class DeleteItem extends BaseAction {
         /**
          * Конструктор.
          *
@@ -303,19 +194,7 @@ public class MenuTracker {
          * @param name   Название пункта в меню.
          */
         public DeleteItem(int number, String name) {
-            this.number = number;
-            this.name = name;
-        }
-
-        /**
-         * key.
-         * Метод возвращает номер пункта меню Delete Item.
-         *
-         * @return номер пункта меню.
-         */
-        @Override
-        public int key() {
-            return number;
+            super(number, name);
         }
 
         /**
@@ -334,33 +213,12 @@ public class MenuTracker {
                 System.out.println("------------ There is no item with id: " + id + " -----------");
             }
         }
-
-        /**
-         * info.
-         * Метод возвращает информацию(ключ и описание) о пункте меню Delete Item.
-         *
-         * @return информацию(ключ и описание) о пункте меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), this.name);
-        }
     }
 
     /**
      * FindItemById.
      */
-    private class FindItemById implements UserAction {
-        /**
-         * Номер пункта Find Item By Id в меню.
-         */
-        private final int number;
-
-        /**
-         * Название пункта Find Item By Id в меню.
-         */
-        private final String name;
-
+    private class FindItemById extends BaseAction {
         /**
          * Конструктор.
          *
@@ -368,19 +226,7 @@ public class MenuTracker {
          * @param name   Название пункта в меню.
          */
         public FindItemById(int number, String name) {
-            this.number = number;
-            this.name = name;
-        }
-
-        /**
-         * key.
-         * Метод возвращает номер пункта меню Find Item By Id.
-         *
-         * @return номер пункта меню.
-         */
-        @Override
-        public int key() {
-            return number;
+            super(number, name);
         }
 
         /**
@@ -401,33 +247,12 @@ public class MenuTracker {
             }
             System.out.println("---------------------------------------");
         }
-
-        /**
-         * info.
-         * Метод возвращает информацию(ключ и описание) о пункте меню Find Item By Id.
-         *
-         * @return информацию(ключ и описание) о пункте меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), this.name);
-        }
     }
 
     /**
      * FindItemsByname.
      */
-    private class FindItemsByname implements UserAction {
-        /**
-         * Номер пункта Find Items By name в меню.
-         */
-        private final int number;
-
-        /**
-         * Название пункта Find Items By name в меню.
-         */
-        private final String name;
-
+    private class FindItemsByname extends BaseAction {
         /**
          * Конструктор.
          *
@@ -435,19 +260,7 @@ public class MenuTracker {
          * @param name   Название пункта в меню.
          */
         public FindItemsByname(int number, String name) {
-            this.number = number;
-            this.name = name;
-        }
-
-        /**
-         * key.
-         * Метод возвращает номер пункта меню Find Items By name.
-         *
-         * @return номер пункта меню.
-         */
-        @Override
-        public int key() {
-            return number;
+            super(number, name);
         }
 
         /**
@@ -468,33 +281,12 @@ public class MenuTracker {
             }
             System.out.println("---------------------------------------");
         }
-
-        /**
-         * info.
-         * Метод возвращает информацию(ключ и описание) о пункте меню Find Items By name.
-         *
-         * @return информацию(ключ и описание) о пункте меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), this.name);
-        }
     }
 
     /**
      * ExitProgram.
      */
-    private class ExitProgram implements UserAction {
-        /**
-         * Номер пункта Exit Program в меню.
-         */
-        private final int number;
-
-        /**
-         * Название пункта Exit Program в меню.
-         */
-        private final String name;
-
+    private class ExitProgram extends BaseAction {
         /**
          * Ссылка на объект класса StartUI.
          */
@@ -508,20 +300,8 @@ public class MenuTracker {
          * @param ui     ссылка на объект класса StartUI.
          */
         public ExitProgram(int number, String name, StartUI ui) {
-            this.number = number;
-            this.name = name;
+            super(number, name);
             this.ui = ui;
-        }
-
-        /**
-         * key.
-         * Метод возвращает номер пункта меню Exit Program.
-         *
-         * @return номер пункта меню.
-         */
-        @Override
-        public int key() {
-            return number;
         }
 
         /**
@@ -535,17 +315,6 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             System.out.println("------------ Program has been stopped ------------------");
             this.ui.stop();
-        }
-
-        /**
-         * info.
-         * Метод возвращает информацию(ключ и описание) о пункте меню Exit Program.
-         *
-         * @return информацию(ключ и описание) о пункте меню.
-         */
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), this.name);
         }
     }
 }
