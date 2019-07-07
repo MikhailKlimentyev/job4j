@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,10 +10,8 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * ValidateInputTest.
@@ -20,6 +21,7 @@ import static org.junit.Assert.assertThat;
  * @since 01/06/2019
  */
 public class ValidateInputTest {
+
     /**
      * Поле содержит дефолтный вывод в консоль.
      */
@@ -51,48 +53,48 @@ public class ValidateInputTest {
     @Test
     public void whenValidInputThenThereIsNoMessage() {
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[]{"0"})
+            new StubInput(Arrays.asList("0"))
         );
-        int[] range = new int[7];
-        range[0] = 0;
+        List<Integer> range = new ArrayList<>();
+        range.add(0);
         input.ask("Please, select menu number: ", range);
         assertThat(
-                this.mem.toString(),
-                is(
-                        String.format("")
-                )
+            this.mem.toString(),
+            is(
+                String.format("")
+            )
         );
     }
 
     @Test
     public void whenInvalidInputThenAppropriateMessage() {
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[]{"Invalid", "0"})
+            new StubInput(Arrays.asList("Invalid", "0"))
         );
-        int[] range = new int[7];
-        range[0] = 0;
+        List<Integer> range = new ArrayList<>();
+        range.add(0);
         input.ask("Please, select menu number: ", range);
         assertThat(
-                this.mem.toString(),
-                is(
-                        String.format("Please, enter number.%n")
-                )
+            this.mem.toString(),
+            is(
+                String.format("Please, enter number.%n")
+            )
         );
     }
 
     @Test
     public void whenOutOfMenuRangeInputThenAppropriateMessage() {
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[]{"1", "0"})
+            new StubInput(Arrays.asList("1", "0"))
         );
-        int[] range = new int[7];
-        range[0] = 0;
+        List<Integer> range = new ArrayList<>();
+        range.add(0);
         input.ask("Please, select menu number: ", range);
         assertThat(
-                this.mem.toString(),
-                is(
-                        String.format("Please, enter number from menu.%n")
-                )
+            this.mem.toString(),
+            is(
+                String.format("Please, enter number from menu.%n")
+            )
         );
     }
 }

@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -15,12 +16,7 @@ public class Tracker {
     /**
      * Массив для хранения заявок.
      */
-    private final Item[] items = new Item[100];
-
-    /**
-     * Указатель ячейки для новой заявки.
-     */
-    private int position = 0;
+    private final List<Item> items = new ArrayList<>();
 
     /**
      * generateId.
@@ -43,7 +39,7 @@ public class Tracker {
      */
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items[this.position++] = item;
+        this.items.add(item);
         return item;
     }
 
@@ -60,10 +56,10 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        for (int index = 0; index != this.position; index++) {
-            if (this.items[index].getId().equals(id)) {
-                this.items[index] = item;
-                this.items[index].setId(this.generateId());
+        for (int index = 0; index != this.items.size(); index++) {
+            if (this.items.get(index).getId().equals(id)) {
+                this.items.set(index, item);
+                this.items.get(index).setId(this.generateId());
                 result = true;
                 break;
             }
@@ -87,10 +83,9 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int index = 0; index != this.position; index++) {
-            if (this.items[index].getId().equals(id)) {
-                System.arraycopy(this.items, index + 1, this.items, index, this.position - index - 1);
-                this.position--;
+        for (int index = 0; index != this.items.size(); index++) {
+            if (this.items.get(index).getId().equals(id)) {
+                items.remove(index);
                 result = true;
                 break;
             }
@@ -104,8 +99,8 @@ public class Tracker {
      *
      * @return копия массива, содержащего заявки, без null элементов;
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(this.items, this.position);
+    public List<Item> findAll() {
+        return items;
     }
 
     /**
@@ -116,14 +111,13 @@ public class Tracker {
      * @param key имя заявки.
      * @return массив заявок, имеющих имя, совпадающее с именем заявки из параметра.
      */
-    public Item[] findByName(String key) {
-        Item[] result = new Item[this.position];
-        int counter = 0;
-        for (int index = 0; index != this.position; index++) {
-            if (this.items[index].getName().equals(key)) {
-                result[counter] = this.items[index];
-                counter++;
+    public List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
+        for (Item item : items) {
+            if (item.getName().equals(key)) {
+                result.add(item);
             }
+
         }
         return result;
     }
@@ -131,16 +125,17 @@ public class Tracker {
     /**
      * findById.
      * Метод проходит весь массив с заявками, сравнивает уникальный идентификатор заявки из параметра
-     * с уникальным идентификатором каждой заявки из массива, возвращает первую заявку, чей уникальный идентификатор совпадает
+     * с уникальным идентификатором каждой заявки из массива, возвращает первую заявку, чей уникальный идентификатор
+     * совпадает
      * с уникальным идентификатором из параметра, если такой заявки не найдено, то возвращает null;
      *
      * @param id уникальный идентификатор заявки.
      * @return заявка с уникальным идентификатором из параметра, или null, если такой заявки нет.
      */
     public Item findById(String id) {
-        for (int index = 0; index != this.position; index++) {
-            if (this.items[index].getId().equals(id)) {
-                return this.items[index];
+        for (int index = 0; index != items.size(); index++) {
+            if (this.items.get(index).getId().equals(id)) {
+                return this.items.get(index);
             }
         }
         return null;

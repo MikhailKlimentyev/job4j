@@ -8,6 +8,7 @@ package ru.job4j.tracker;
  * @since 01/20/2019
  */
 public abstract class BaseAction implements UserAction {
+
     /**
      * Номер пункта меню.
      */

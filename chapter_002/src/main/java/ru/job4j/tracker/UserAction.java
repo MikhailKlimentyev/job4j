@@ -8,6 +8,7 @@ package ru.job4j.tracker;
  * @since 01/04/2019
  */
 public interface UserAction {
+
     /**
      * key.
      * Метод возвращает номер пункта меню.

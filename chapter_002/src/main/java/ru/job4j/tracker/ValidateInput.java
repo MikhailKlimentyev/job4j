@@ -48,7 +48,7 @@ public class ValidateInput implements Input {
      * @return ключ меню.
      */
     @Override
-    public int ask(String question, int[] range) {
+    public int ask(String question, List<Integer> range) {
         int value = -1;
         boolean invalid = true;
         do {

@@ -20,7 +20,7 @@ public class StubInput implements Input {
      * desc - описание заявки
      * y - выйти из трекера.
      */
-    private final String[] value;
+    private final List<String> value;
 
     /**
      * Поле считает количество вызовов метода ask.
@@ -28,7 +28,7 @@ public class StubInput implements Input {
      */
     private int position;
 
-    public StubInput(final String[] value) {
+    public StubInput(List<String> value) {
         this.value = value;
     }
 
@@ -42,11 +42,11 @@ public class StubInput implements Input {
      */
     @Override
     public String ask(String question) {
-        return this.value[this.position++];
+        return this.value.get(this.position++);
     }
 
     @Override
-    public int ask(String question, int[] range) throws MenuOutException {
+    public int ask(String question, List<Integer> range) throws MenuOutException {
         int key = Integer.valueOf(ask(question));
         boolean exist = false;
         for (int value : range) {

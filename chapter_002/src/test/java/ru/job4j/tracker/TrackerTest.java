@@ -19,7 +19,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("testName", "testDescription");
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class TrackerTest {
         Item next = new Item("testName2", "testDescription2");
         next.setId(previous.getId());
         assertTrue(tracker.replace(previous.getId(), next));
-        assertThat(tracker.findAll()[0].getName(), is("testName2"));
+        assertThat(tracker.findAll().get(0).getName(), is("testName2"));
     }
 
     @Test
@@ -53,9 +53,9 @@ public class TrackerTest {
         tracker.add(item2);
         tracker.add(item3);
         assertTrue(tracker.delete(item1.getId()));
-        assertThat(tracker.findAll().length, is(2));
-        assertThat(tracker.findAll()[0], is(item2));
-        assertThat(tracker.findAll()[1], is(item3));
+        assertThat(tracker.findAll().size(), is(2));
+        assertThat(tracker.findAll().get(0), is(item2));
+        assertThat(tracker.findAll().get(1), is(item3));
     }
 
     @Test
@@ -68,9 +68,9 @@ public class TrackerTest {
         tracker.add(item2);
         tracker.add(item3);
         assertTrue(tracker.delete(item2.getId()));
-        assertThat(tracker.findAll().length, is(2));
-        assertThat(tracker.findAll()[0], is(item1));
-        assertThat(tracker.findAll()[1], is(item3));
+        assertThat(tracker.findAll().size(), is(2));
+        assertThat(tracker.findAll().get(0), is(item1));
+        assertThat(tracker.findAll().get(1), is(item3));
     }
 
     @Test
@@ -83,9 +83,9 @@ public class TrackerTest {
         tracker.add(item2);
         tracker.add(item3);
         assertTrue(tracker.delete(item3.getId()));
-        assertThat(tracker.findAll().length, is(2));
-        assertThat(tracker.findAll()[0], is(item1));
-        assertThat(tracker.findAll()[1], is(item2));
+        assertThat(tracker.findAll().size(), is(2));
+        assertThat(tracker.findAll().get(0), is(item1));
+        assertThat(tracker.findAll().get(1), is(item2));
     }
 
     @Test
@@ -110,14 +110,14 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        assertThat(tracker.findAll().length, is(3));
-        assertThat(tracker.findAll()[0], is(item1));
-        assertThat(tracker.findAll()[1], is(item2));
-        assertThat(tracker.findAll()[2], is(item3));
+        assertThat(tracker.findAll().size(), is(3));
+        assertThat(tracker.findAll().get(0), is(item1));
+        assertThat(tracker.findAll().get(1), is(item2));
+        assertThat(tracker.findAll().get(2), is(item3));
     }
 
     @Test
-    public void whenFindByNameThenArrayOfItemsReturned() {
+    public void whenFindByNameThenListOfItemsReturned() {
         Tracker tracker = new Tracker();
         Item item1 = new Item("testName1", "testDescription1");
         Item item2 = new Item("testName2", "testDescription2");
@@ -125,10 +125,9 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item1);
         tracker.add(item3);
-        assertThat(tracker.findByName("testName1").length, is(3));
-        assertThat(tracker.findByName("testName1")[0], is(item1));
-        assertThat(tracker.findByName("testName1")[1], is(item1));
-        assertThat(tracker.findByName("testName1")[2], is(nullValue()));
+        assertThat(tracker.findByName("testName1").size(), is(2));
+        assertThat(tracker.findByName("testName1").get(0), is(item1));
+        assertThat(tracker.findByName("testName1").get(1), is(item1));
     }
 
     @Test
@@ -140,7 +139,7 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        String expected = tracker.findAll()[1].getId();
+        String expected = tracker.findAll().get(1).getId();
         assertThat(tracker.findById(expected), is(item2));
     }
 
