@@ -46,9 +46,9 @@ public class Tracker {
     /**
      * replace.
      * Метод проходит по всем элементам массива и если уникальный ключ переданной заявки
-     * совпадает с уникальным ключом заявки из массива, то заменяет заявку в массиве и выходит из цикла,
-     * при замене генерируется уникальный ключ для заявки.
+     * совпадает с уникальным ключом заявки из массива, то заменяет заявку в массиве и выходит из цикла.
      * Возращает результат замены (true -- если удалось заменить, false -- если не удалось заменить).
+     * при замене id заявки не меняется.
      *
      * @param id   уникальный ключ для заявки.
      * @param item заявка.
@@ -59,7 +59,7 @@ public class Tracker {
         for (int index = 0; index != this.items.size(); index++) {
             if (this.items.get(index).getId().equals(id)) {
                 this.items.set(index, item);
-                this.items.get(index).setId(this.generateId());
+                this.items.get(index).setId(id);
                 result = true;
                 break;
             }

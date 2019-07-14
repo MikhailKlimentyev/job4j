@@ -155,7 +155,7 @@ public class StartUIConsoleOutputTest {
 
     //deleteItem() test
     @Test
-    public void whenEditItemThenIdOfDeletedItemPrintedInConsole() {
+    public void whenDeleteItemThenIdOfDeletedItemPrintedInConsole() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         new StartUI(new StubInput(Arrays.asList("3", item.getId(), "6")), tracker).init();

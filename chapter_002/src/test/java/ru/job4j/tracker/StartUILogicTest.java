@@ -58,6 +58,7 @@ public class StartUILogicTest {
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(Arrays.asList("2", "replaced name", "replaced desc", item.getId(), "6"));
         new StartUI(input, tracker).init();
+        assertThat(tracker.findAll().get(0).getId(), is(item.getId()));
         assertThat(tracker.findAll().get(0).getName(), is("replaced name"));
         assertThat(tracker.findAll().get(0).getDesc(), is("replaced desc"));
     }

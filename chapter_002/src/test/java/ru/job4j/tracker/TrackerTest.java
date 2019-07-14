@@ -1,9 +1,12 @@
 package ru.job4j.tracker;
 
-import org.junit.Test;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 /**
  * TrackerTest.
@@ -31,6 +34,28 @@ public class TrackerTest {
         next.setId(previous.getId());
         assertTrue(tracker.replace(previous.getId(), next));
         assertThat(tracker.findAll().get(0).getName(), is("testName2"));
+    }
+
+    @Test
+    public void whenReplaceDescriptionThenReturnNewDescription() {
+        Tracker tracker = new Tracker();
+        Item previous = new Item("testName1", "testDescription1");
+        tracker.add(previous);
+        Item next = new Item("testName2", "testDescription2");
+        next.setId(previous.getId());
+        assertTrue(tracker.replace(previous.getId(), next));
+        assertThat(tracker.findAll().get(0).getDesc(), is("testDescription2"));
+    }
+
+    @Test
+    public void whenReplaceItemThenReturnOriginalId() {
+        Tracker tracker = new Tracker();
+        Item previous = new Item("testName1", "testDescription1");
+        tracker.add(previous);
+        Item next = new Item("testName2", "testDescription2");
+        next.setId(previous.getId());
+        assertTrue(tracker.replace(previous.getId(), next));
+        assertThat(tracker.findAll().get(0).getId(), is(previous.getId()));
     }
 
     @Test
