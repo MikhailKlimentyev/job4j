@@ -16,11 +16,7 @@ public class Calculator {
     public static void main(String[] args) {
         Calculator calc = new Calculator();
         calc.multiple(0, 10, 2,
-            (value, index) -> {
-                double result = value * index;
-                System.out.printf("Multiple %s * %s = %s %n", value, index, result);
-                return result;
-            },
+            MathUtil::add,
             result -> System.out.println(result)
         );
     }
