@@ -25,4 +25,7 @@ hs_err_pid*
 .idea
 *.iml
 
+git
+master
+
 target
