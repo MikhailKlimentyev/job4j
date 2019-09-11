@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * MenuTracker.
@@ -11,7 +12,6 @@ import java.util.List;
  * @since 01/04/2018
  */
 public class MenuTracker {
-
     /**
      * Получение данных от пользователя.
      */
@@ -21,6 +21,11 @@ public class MenuTracker {
      * Хранилище заявок.
      */
     private Tracker tracker;
+
+    /**
+     * Вывод данных.
+     */
+    private Consumer<String> output;
 
     /**
      * Gets actions.
@@ -52,10 +57,12 @@ public class MenuTracker {
      *
      * @param input   объект класса, который реализуюет интерфейс Input.
      * @param tracker объект класса Tracker.
+     * @param output  вывод данных
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
     }
 
     /**
@@ -94,7 +101,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                output.accept(action.info());
             }
         }
     }
@@ -122,12 +129,12 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Adding of a new item --------------");
+            output.accept("------------ Adding of a new item --------------");
             String name = input.ask("Please, type item name: ");
             String desc = input.ask("Please, type item description: ");
             Item item = new Item(name, desc);
             tracker.add(item);
-            System.out.println("------------ New item with Id: " + item.getId() + " is created -----------");
+            output.accept(String.format("------------ New item with Id: %s is created -----------", item.getId()));
         }
     }
 
@@ -154,12 +161,12 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ All items: --------------");
+            output.accept("------------ All items: --------------");
             List<Item> items = tracker.findAll();
             for (int i = 0; i < items.size(); i++) {
-                System.out.println(i + ". " + items.get(i));
+                output.accept(String.format("%s. %s", i, items.get(i)));
             }
-            System.out.println("---------------------------------------");
+            output.accept("---------------------------------------");
         }
     }
 
@@ -192,9 +199,9 @@ public class MenuTracker {
             Item item = new Item(name, desc);
             String id = input.ask("Please, type id of item to be replaced: ");
             if (tracker.replace(id, item)) {
-                System.out.println("------------ Item with Id: " + id + " was successfully replaced -----------");
+                output.accept(String.format("------------ Item with Id: %s was successfully replaced -----------", id));
             } else {
-                System.out.println("------------ There is no item with id: " + id + " -----------");
+                output.accept(String.format("------------ There is no item with id: %s -----------", id));
             }
         }
     }
@@ -224,9 +231,9 @@ public class MenuTracker {
         public void execute(Input input, Tracker tracker) {
             String id = input.ask("Please, type id of item to be deleted: ");
             if (tracker.delete(id)) {
-                System.out.println("------------ Item with Id: " + id + " was successfully deleted -----------");
+                output.accept(String.format("------------ Item with Id: %s was successfully deleted -----------", id));
             } else {
-                System.out.println("------------ There is no item with id: " + id + " -----------");
+                output.accept(String.format("------------ There is no item with id: %s -----------", id));
             }
         }
     }
@@ -257,11 +264,11 @@ public class MenuTracker {
             String id = input.ask("Please, type id of item to be printed: ");
             Item item = tracker.findById(id);
             if (item != null) {
-                System.out.println(item);
+                output.accept(item.toString());
             } else {
-                System.out.println("------------ There is no item with id: " + id + " -----------");
+                output.accept(String.format("------------ There is no item with id: %s -----------", id));
             }
-            System.out.println("---------------------------------------");
+            output.accept("---------------------------------------");
         }
     }
 
@@ -292,10 +299,10 @@ public class MenuTracker {
             List<Item> items = tracker.findByName(name);
             for (int i = 0; i != items.size(); i++) {
                 if (items.get(i) != null) {
-                    System.out.println(items.get(i));
+                    output.accept(items.get(i).toString());
                 }
             }
-            System.out.println("---------------------------------------");
+            output.accept("---------------------------------------");
         }
     }
 
@@ -330,7 +337,7 @@ public class MenuTracker {
          */
         @Override
         public void execute(Input input, Tracker tracker) {
-            System.out.println("------------ Program has been stopped ------------------");
+            output.accept("------------ Program has been stopped ------------------");
             this.ui.stop();
         }
     }

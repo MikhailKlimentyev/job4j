@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,9 +10,7 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import java.util.function.Consumer;
 
 /**
  * StartUIConsoleOutputTest.
@@ -19,16 +20,28 @@ import static org.junit.Assert.assertThat;
  * @since 01/01/2019
  */
 public class StartUIConsoleOutputTest {
-
     /**
      * Поле содержит дефолтный вывод в консоль.
      */
-    private final PrintStream out = System.out;
+    private final PrintStream sout = System.out;
 
     /**
      * Буфер для результата.
      */
-    private final ByteArrayOutputStream mem = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    /**
+     * Вывод в буфер
+     */
+    private final Consumer<String> output = new Consumer<String>() {
+
+        private final PrintStream output = new PrintStream(out);
+
+        @Override
+        public void accept(String s) {
+            output.println(s);
+        }
+    };
 
     /**
      * Текст меню, которое выводится на консоль.
@@ -59,7 +72,7 @@ public class StartUIConsoleOutputTest {
     @Before
     public void loadOutput() {
         System.out.println("Execute before method.");
-        System.setOut(new PrintStream(this.mem));
+        System.setOut(new PrintStream(this.out));
     }
 
     /**
@@ -67,17 +80,18 @@ public class StartUIConsoleOutputTest {
      */
     @After
     public void backOutput() {
-        System.setOut(this.out);
+        System.setOut(this.sout);
         System.out.println("Execute after method.");
     }
+
 
     //createItem() test
     @Test
     public void whenCreateItemThenIdOfCreatedItemPrintedInConsole() {
         Tracker tracker = new Tracker();
-        new StartUI(new StubInput(Arrays.asList("0", "test name", "desc", "6")), tracker).init();
+        new StartUI(new StubInput(Arrays.asList("0", "test name", "desc", "6")), tracker, output).init();
         assertThat(
-            new String(mem.toByteArray()),
+            new String(out.toByteArray()),
             is(
                 new StringBuilder()
                     .append(menu)
@@ -104,9 +118,9 @@ public class StartUIConsoleOutputTest {
         Item firstItem = tracker.add(new Item("first name", "first desc"));
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
-        new StartUI(new StubInput(Arrays.asList("1", "6")), tracker).init();
+        new StartUI(new StubInput(Arrays.asList("1", "6")), tracker, output).init();
         assertThat(
-            new String(mem.toByteArray()),
+            new String(out.toByteArray()),
             is(
                 new StringBuilder()
                     .append(menu)
@@ -136,9 +150,9 @@ public class StartUIConsoleOutputTest {
         Item item = tracker.add(new Item("name", "desc"));
         String initialId = tracker.findAll().get(0).getId();
         new StartUI(new StubInput(Arrays.asList("2", "replaced name", "replaced desc", item.getId(), "6")),
-            tracker).init();
+            tracker, output).init();
         assertThat(
-            new String(mem.toByteArray()),
+            new String(out.toByteArray()),
             is(
                 new StringBuilder()
                     .append(menu)
@@ -158,9 +172,9 @@ public class StartUIConsoleOutputTest {
     public void whenDeleteItemThenIdOfDeletedItemPrintedInConsole() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        new StartUI(new StubInput(Arrays.asList("3", item.getId(), "6")), tracker).init();
+        new StartUI(new StubInput(Arrays.asList("3", item.getId(), "6")), tracker, output).init();
         assertThat(
-            new String(mem.toByteArray()),
+            new String(out.toByteArray()),
             is(
                 new StringBuilder()
                     .append(menu)
@@ -180,9 +194,9 @@ public class StartUIConsoleOutputTest {
     public void whenFindItemByIdThenDeletedItemPrintedInConsole() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        new StartUI(new StubInput(Arrays.asList("4", item.getId(), "6")), tracker).init();
+        new StartUI(new StubInput(Arrays.asList("4", item.getId(), "6")), tracker, output).init();
         assertThat(
-            new String(mem.toByteArray()),
+            new String(out.toByteArray()),
             is(
                 new StringBuilder()
                     .append(menu)
@@ -204,9 +218,9 @@ public class StartUIConsoleOutputTest {
     public void whenFindItemByNameThenDeletedItemPrintedInConsole() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
-        new StartUI(new StubInput(Arrays.asList("5", item.getName(), "6")), tracker).init();
+        new StartUI(new StubInput(Arrays.asList("5", item.getName(), "6")), tracker, output).init();
         assertThat(
-            new String(mem.toByteArray()),
+            new String(out.toByteArray()),
             is(
                 new StringBuilder()
                     .append(menu)

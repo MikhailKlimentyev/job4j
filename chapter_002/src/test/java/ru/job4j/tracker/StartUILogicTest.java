@@ -22,7 +22,7 @@ public class StartUILogicTest {
         Tracker tracker = new Tracker();
 
         Input input = new StubInput(Arrays.asList("0", "test name", "desc", "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().get(0).getName(), is("test name"));
     }
 
@@ -32,7 +32,7 @@ public class StartUILogicTest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(Arrays.asList("1", "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(1));
         assertThat(tracker.findAll().get(0), is(item));
     }
@@ -44,7 +44,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("1", "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(3));
         assertThat(tracker.findAll().get(0), is(firstItem));
         assertThat(tracker.findAll().get(1), is(secondItem));
@@ -57,7 +57,7 @@ public class StartUILogicTest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(Arrays.asList("2", "replaced name", "replaced desc", item.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().get(0).getId(), is(item.getId()));
         assertThat(tracker.findAll().get(0).getName(), is("replaced name"));
         assertThat(tracker.findAll().get(0).getDesc(), is("replaced desc"));
@@ -68,7 +68,7 @@ public class StartUILogicTest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(Arrays.asList("2", "replaced name", "replaced desc", item.getId() + "0", "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().get(0), is(item));
     }
 
@@ -79,7 +79,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("2", "replaced name", "replaced desc", firstItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(3));
         assertThat(tracker.findAll().get(0).getName(), is("replaced name"));
         assertThat(tracker.findAll().get(0).getDesc(), is("replaced desc"));
@@ -92,7 +92,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("2", "replaced name", "replaced desc", thirdItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(3));
         assertThat(tracker.findAll().get(2).getName(), is("replaced name"));
         assertThat(tracker.findAll().get(2).getDesc(), is("replaced desc"));
@@ -105,7 +105,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("2", "replaced name", "replaced desc", secondItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(3));
         assertThat(tracker.findAll().get(1).getName(), is("replaced name"));
     }
@@ -116,7 +116,7 @@ public class StartUILogicTest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(Arrays.asList("3", item.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(0));
     }
 
@@ -125,7 +125,7 @@ public class StartUILogicTest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(Arrays.asList("3", "1" + item.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(1));
         assertThat(tracker.findAll().get(0), is(item));
     }
@@ -137,7 +137,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("3", firstItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(2));
         assertThat(tracker.findAll().get(0), is(secondItem));
         assertThat(tracker.findAll().get(1), is(thirdItem));
@@ -150,7 +150,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("3", thirdItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(2));
         assertThat(tracker.findAll().get(0), is(firstItem));
         assertThat(tracker.findAll().get(1), is(secondItem));
@@ -163,7 +163,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("3", secondItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().size(), is(2));
         assertThat(tracker.findAll().get(0), is(firstItem));
         assertThat(tracker.findAll().get(1), is(thirdItem));
@@ -175,7 +175,7 @@ public class StartUILogicTest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(Arrays.asList("4", item.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
@@ -185,7 +185,7 @@ public class StartUILogicTest {
         Item item = tracker.add(new Item("name", "desc"));
         Item firstItem = new Item("first name", "first desc");
         Input input = new StubInput(Arrays.asList("4", firstItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findById(firstItem.getId()), is(nullValue()));
     }
 
@@ -196,7 +196,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("4", firstItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().get(0), is(firstItem));
     }
 
@@ -207,7 +207,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("4", thirdItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().get(2), is(thirdItem));
     }
 
@@ -218,7 +218,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("4", secondItem.getId(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findAll().get(1), is(secondItem));
     }
 
@@ -228,7 +228,7 @@ public class StartUILogicTest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(Arrays.asList("5", item.getName(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findByName(item.getName()).get(0), is(item));
     }
 
@@ -239,7 +239,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("name", "second desc"));
         Item thirdItem = tracker.add(new Item("name", "third desc"));
         Input input = new StubInput(Arrays.asList("5", secondItem.getName(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findByName(secondItem.getName()).get(0), is(secondItem));
         assertThat(tracker.findByName(secondItem.getName()).get(1), is(thirdItem));
     }
@@ -249,7 +249,7 @@ public class StartUILogicTest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("name", "desc"));
         Input input = new StubInput(Arrays.asList("5", item.getName() + "343434", "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findByName(item.getName() + "343434").size(), is(0));
     }
 
@@ -260,7 +260,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("4", firstItem.getName(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findByName(firstItem.getName()).get(0), is(firstItem));
     }
 
@@ -271,7 +271,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("4", thirdItem.getName(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findByName(thirdItem.getName()).get(0), is(thirdItem));
     }
 
@@ -282,7 +282,7 @@ public class StartUILogicTest {
         Item secondItem = tracker.add(new Item("second name", "second desc"));
         Item thirdItem = tracker.add(new Item("third name", "third desc"));
         Input input = new StubInput(Arrays.asList("4", secondItem.getName(), "6"));
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, System.out::println).init();
         assertThat(tracker.findByName(secondItem.getName()).get(0), is(secondItem));
     }
 }
