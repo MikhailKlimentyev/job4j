@@ -43,12 +43,11 @@ public class BankOperations {
      * @param account  the account
      */
     public void addAccountToUser(String passport, Account account) {
-        for (Map.Entry<User, List<Account>> entry : this.userAccountsListMap.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                entry.getValue().add(account);
-                break;
-            }
-        }
+        this.userAccountsListMap.entrySet()
+            .stream()
+            .filter(entry -> entry.getKey().getPassport().equals(passport))
+            .findFirst()
+            .ifPresent(entry -> entry.getValue().add(account));
     }
 
     /**
@@ -58,11 +57,11 @@ public class BankOperations {
      * @param account  the account
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        for (Map.Entry<User, List<Account>> entry : this.userAccountsListMap.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                entry.getValue().remove(account);
-            }
-        }
+        this.userAccountsListMap.entrySet()
+            .stream()
+            .filter(entry -> entry.getKey().getPassport().equals(passport))
+            .findFirst()
+            .ifPresent(entry -> entry.getValue().remove(account));
     }
 
     /**
@@ -72,14 +71,12 @@ public class BankOperations {
      * @return the user accounts
      */
     public List<Account> getUserAccounts(String passport) {
-        List<Account> accounts = null;
-        for (Map.Entry<User, List<Account>> entry : this.userAccountsListMap.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                accounts = entry.getValue();
-                break;
-            }
-        }
-        return accounts;
+        return this.userAccountsListMap.entrySet()
+            .stream()
+            .filter(entry -> entry.getKey().getPassport().equals(passport))
+            .map(entry -> entry.getValue())
+            .findFirst()
+            .orElse(null);
     }
 
     /**
@@ -108,16 +105,13 @@ public class BankOperations {
     }
 
     private Account getAccount(String passport, String requisite) {
-        for (Map.Entry<User, List<Account>> entry : this.userAccountsListMap.entrySet()) {
-            if (entry.getKey().getPassport().equals(passport)) {
-                List<Account> accounts = entry.getValue();
-                for (Account account : accounts) {
-                    if (account.getRequisites().equals(requisite)) {
-                        return account;
-                    }
-                }
-            }
-        }
-        return null;
+        return this.userAccountsListMap.entrySet()
+            .stream()
+            .filter(entry -> entry.getKey().getPassport().equals(passport))
+            .map(entry -> entry.getValue())
+            .flatMap(accounts -> accounts.stream())
+            .filter(account -> account.getRequisites().equals(requisite))
+            .findFirst()
+            .orElse(null);
     }
 }
