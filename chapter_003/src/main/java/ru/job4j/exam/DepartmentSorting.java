@@ -3,7 +3,6 @@ package ru.job4j.exam;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -67,16 +66,16 @@ public class DepartmentSorting {
         List<String> departmentParts = null;
         if (delimiterCount == 0) {
             group = department;
-            departmentParts = Collections.singletonList(group);
+            departmentParts = List.of(group);
         } else if (delimiterCount == 1) {
             group = department.substring(0, 2);
             service = department;
-            departmentParts = Arrays.asList(group, service);
+            departmentParts = List.of(group, service);
         } else if (delimiterCount == 2) {
             group = department.substring(0, 2);
             service = department.substring(0, 6);
             division = department;
-            departmentParts = Arrays.asList(group, service, division);
+            departmentParts = List.of(group, service, division);
         }
         return departmentParts;
     }

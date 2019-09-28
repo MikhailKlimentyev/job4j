@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ConvertMatrix2ListTest {
@@ -17,9 +16,7 @@ public class ConvertMatrix2ListTest {
             {1, 2},
             {3, 4}
         };
-        List<Integer> expect = Arrays.asList(
-            1, 2, 3, 4
-        );
+        List<Integer> expect = List.of(1, 2, 3, 4);
         List<Integer> result = list.toList(input);
         assertThat(result, is(expect));
     }
@@ -32,9 +29,7 @@ public class ConvertMatrix2ListTest {
             {4, 5, 6},
             {7, 8, 9}
         };
-        List<Integer> expect = Arrays.asList(
-            1, 2, 3, 4, 5, 6, 7, 8, 9
-        );
+        List<Integer> expect = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
         List<Integer> result = list.toList(input);
         assertThat(result, is(expect));
     }
@@ -46,9 +41,7 @@ public class ConvertMatrix2ListTest {
             {1, 2, 3, 4, 5},
             {6, 7, 8, 9, 10}
         };
-        List<Integer> expect = Arrays.asList(
-            1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-        );
+        List<Integer> expect = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         List<Integer> result = list.toList(input);
         assertThat(result, is(expect));
     }
@@ -61,9 +54,7 @@ public class ConvertMatrix2ListTest {
             {3, 4},
             {5, 6}
         };
-        List<Integer> expect = Arrays.asList(
-            1, 2, 3, 4, 5, 6
-        );
+        List<Integer> expect = List.of(1, 2, 3, 4, 5, 6);
         List<Integer> result = list.toList(input);
         assertThat(result, is(expect));
     }
