@@ -9,9 +9,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +19,7 @@ public class BankOperationsTest {
         BankOperations bankOperations = new BankOperations();
         User ivan = new User("Ivan", "12345");
         bankOperations.addUser(ivan);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, new ArrayList<>());
+        Map<User, List<Account>> expectedMap = Map.of(ivan, new ArrayList<>());
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -34,8 +30,7 @@ public class BankOperationsTest {
         bankOperations.addUser(ivan);
         bankOperations.deleteUser(ivan);
         bankOperations.addUser(ivan);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, new ArrayList<>());
+        Map<User, List<Account>> expectedMap = Map.of(ivan, new ArrayList<>());
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -46,9 +41,7 @@ public class BankOperationsTest {
         User petr = new User("Petr", "666");
         bankOperations.addUser(ivan);
         bankOperations.addUser(petr);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, new ArrayList<>());
-        expectedMap.put(petr, new ArrayList<>());
+        Map<User, List<Account>> expectedMap = Map.of(ivan, new ArrayList<>(), petr, new ArrayList<>());
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -58,8 +51,7 @@ public class BankOperationsTest {
         User ivan = new User("Ivan", "12345");
         bankOperations.addUser(ivan);
         bankOperations.addUser(ivan);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, new ArrayList<>());
+        Map<User, List<Account>> expectedMap = Map.of(ivan, new ArrayList<>());
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -80,8 +72,7 @@ public class BankOperationsTest {
         bankOperations.addUser(ivan);
         bankOperations.addUser(petr);
         bankOperations.deleteUser(ivan);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(petr, new ArrayList<>());
+        Map<User, List<Account>> expectedMap = Map.of(petr, new ArrayList<>());
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -100,8 +91,7 @@ public class BankOperationsTest {
         Account account = new Account(17.0, "74747");
         bankOperations.addUser(ivan);
         bankOperations.addAccountToUser(ivan.getPassport(), account);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, Collections.singletonList(account));
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of(account));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -114,8 +104,7 @@ public class BankOperationsTest {
         bankOperations.addAccountToUser(ivan.getPassport(), account);
         bankOperations.deleteAccountFromUser(ivan.getPassport(), account);
         bankOperations.addAccountToUser(ivan.getPassport(), account);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, Collections.singletonList(account));
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of(account));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -128,8 +117,7 @@ public class BankOperationsTest {
         bankOperations.addUser(ivan);
         bankOperations.addAccountToUser(ivan.getPassport(), firstAccount);
         bankOperations.addAccountToUser(ivan.getPassport(), secondAccount);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, Arrays.asList(firstAccount, secondAccount));
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of(firstAccount, secondAccount));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -146,9 +134,9 @@ public class BankOperationsTest {
         bankOperations.addAccountToUser(ivan.getPassport(), ivanAccount);
         bankOperations.addAccountToUser(petr.getPassport(), petrFirstAccount);
         bankOperations.addAccountToUser(petr.getPassport(), petrSecondAccount);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, Collections.singletonList(ivanAccount));
-        expectedMap.put(petr, Arrays.asList(petrFirstAccount, petrSecondAccount));
+        Map<User, List<Account>> expectedMap = Map.of(
+            ivan, List.of(ivanAccount),
+            petr, List.of(petrFirstAccount, petrSecondAccount));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -161,8 +149,7 @@ public class BankOperationsTest {
         bankOperations.addUser(ivan);
         bankOperations.addAccountToUser(ivan.getPassport(), firstAccount);
         bankOperations.addAccountToUser(ivan.getPassport(), secondAccount);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, Arrays.asList(secondAccount, secondAccount));
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of(secondAccount, secondAccount));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -172,7 +159,7 @@ public class BankOperationsTest {
         User ivan = new User("Ivan", "12345");
         Account account = new Account(17.0, "74747");
         bankOperations.addAccountToUser(ivan.getPassport(), account);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
+        Map<User, List<Account>> expectedMap = Map.of();
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -186,8 +173,7 @@ public class BankOperationsTest {
         bankOperations.addUser(ivan);
         bankOperations.addAccountToUser(ivan.getPassport(), ivanAccount);
         bankOperations.addAccountToUser(petr.getPassport(), petrAccount);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, Collections.singletonList(ivanAccount));
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of(ivanAccount));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -199,8 +185,7 @@ public class BankOperationsTest {
         bankOperations.addUser(ivan);
         bankOperations.addAccountToUser(ivan.getPassport(), account);
         bankOperations.deleteAccountFromUser(ivan.getPassport(), account);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, new ArrayList<>());
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of());
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -214,8 +199,7 @@ public class BankOperationsTest {
         bankOperations.addAccountToUser(ivan.getPassport(), firstAccount);
         bankOperations.addAccountToUser(ivan.getPassport(), secondAccount);
         bankOperations.deleteAccountFromUser(ivan.getPassport(), firstAccount);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, Collections.singletonList(secondAccount));
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of(secondAccount));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -229,8 +213,7 @@ public class BankOperationsTest {
         bankOperations.addAccountToUser(ivan.getPassport(), firstAccount);
         bankOperations.addAccountToUser(ivan.getPassport(), secondAccount);
         bankOperations.deleteAccountFromUser(ivan.getPassport(), firstAccount);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, Collections.singletonList(secondAccount));
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of(secondAccount));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -248,9 +231,8 @@ public class BankOperationsTest {
         bankOperations.deleteAccountFromUser(ivan.getPassport(), ivanAccount);
         bankOperations.addAccountToUser(petr.getPassport(), firstPetrAccount);
         bankOperations.addAccountToUser(petr.getPassport(), secondPetrAccount);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, new ArrayList<>());
-        expectedMap.put(petr, Arrays.asList(firstPetrAccount, secondPetrAccount));
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of(),
+            petr, List.of(firstPetrAccount, secondPetrAccount));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -262,8 +244,7 @@ public class BankOperationsTest {
         bankOperations.addUser(ivan);
         bankOperations.addAccountToUser(ivan.getPassport(), account);
         bankOperations.deleteAccountFromUser(ivan.getPassport() + "1", account);
-        Map<User, List<Account>> expectedMap = new HashMap<>();
-        expectedMap.put(ivan, Collections.singletonList(account));
+        Map<User, List<Account>> expectedMap = Map.of(ivan, List.of(account));
         assertThat(bankOperations.getUserAccountsListMap(), is(expectedMap));
     }
 
@@ -274,7 +255,7 @@ public class BankOperationsTest {
         bankOperations.addUser(ivan);
         Account account = new Account(17.0, "74747");
         bankOperations.addAccountToUser(ivan.getPassport(), account);
-        assertThat(bankOperations.getUserAccounts(ivan.getPassport()), is(Collections.singletonList(account)));
+        assertThat(bankOperations.getUserAccounts(ivan.getPassport()), is(List.of(account)));
     }
 
     @Test
@@ -286,7 +267,7 @@ public class BankOperationsTest {
         Account secondAccount = new Account(25.3, "333");
         bankOperations.addAccountToUser(ivan.getPassport(), firstAccount);
         bankOperations.addAccountToUser(ivan.getPassport(), secondAccount);
-        assertThat(bankOperations.getUserAccounts(ivan.getPassport()), is(Arrays.asList(firstAccount, secondAccount)));
+        assertThat(bankOperations.getUserAccounts(ivan.getPassport()), is(List.of(firstAccount, secondAccount)));
     }
 
     @Test
@@ -294,7 +275,7 @@ public class BankOperationsTest {
         BankOperations bankOperations = new BankOperations();
         User ivan = new User("Ivan", "12345");
         bankOperations.addUser(ivan);
-        assertThat(bankOperations.getUserAccounts(ivan.getPassport()), is(new ArrayList<>()));
+        assertThat(bankOperations.getUserAccounts(ivan.getPassport()), is(List.of()));
     }
 
     @Test
@@ -305,7 +286,7 @@ public class BankOperationsTest {
         bankOperations.addUser(ivan);
         bankOperations.addAccountToUser(ivan.getPassport(), account);
         bankOperations.deleteAccountFromUser(ivan.getPassport(), account);
-        assertThat(bankOperations.getUserAccounts(ivan.getPassport()), is(new ArrayList()));
+        assertThat(bankOperations.getUserAccounts(ivan.getPassport()), is(List.of()));
     }
 
     @Test
@@ -322,9 +303,8 @@ public class BankOperationsTest {
         bankOperations.addAccountToUser(ivan.getPassport(), secondIvanAccount);
         bankOperations.addAccountToUser(petr.getPassport(), petrAccount);
         assertThat(bankOperations.getUserAccounts(ivan.getPassport()),
-            is(Arrays.asList(firstIvanAccount, secondIvanAccount)));
-        assertThat(bankOperations.getUserAccounts(petr.getPassport()),
-            is(Collections.singletonList(petrAccount)));
+            is(List.of(firstIvanAccount, secondIvanAccount)));
+        assertThat(bankOperations.getUserAccounts(petr.getPassport()), is(List.of(petrAccount)));
     }
 
     @Test

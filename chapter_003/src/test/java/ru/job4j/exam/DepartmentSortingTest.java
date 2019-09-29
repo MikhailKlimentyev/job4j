@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ public class DepartmentSortingTest {
     @Test
     public void whenDepartmentsSortAscendThenMissingDepartmentsAddedAndAllDepartmentsSortedAscend() {
         DepartmentSorting departmentSorting = new DepartmentSorting();
-        List<String> departments = Arrays.asList(
+        List<String> departments = List.of(
             "K1\\SK1",
             "K1\\SK2",
             "K1\\SK1\\SSK1",
@@ -28,7 +27,7 @@ public class DepartmentSortingTest {
             "K2\\SK1\\SSK2"
         );
         List<String> actualSortedDepartments = departmentSorting.sortAscend(departments);
-        List<String> expectedSortedDepartments = Arrays.asList(
+        List<String> expectedSortedDepartments = List.of(
             "K1",
             "K1\\SK1",
             "K1\\SK1\\SSK1",
@@ -48,7 +47,7 @@ public class DepartmentSortingTest {
     @Test
     public void whenDepartmentsSortDescendThenMissingDepartmentsAddedAndAllDepartmentsSortedDescend() {
         DepartmentSorting departmentSorting = new DepartmentSorting();
-        List<String> departments = Arrays.asList(
+        List<String> departments = List.of(
             "K1\\SK1",
             "K1\\SK2",
             "K1\\SK1\\SSK1",
@@ -58,7 +57,7 @@ public class DepartmentSortingTest {
             "K2\\SK1\\SSK2"
         );
         List<String> actualSortedDepartments = departmentSorting.sortDescend(departments);
-        List<String> expectedSortedDepartments = Arrays.asList(
+        List<String> expectedSortedDepartments = List.of(
             "K2",
             "K2\\SK1",
             "K2\\SK1\\SSK2",
